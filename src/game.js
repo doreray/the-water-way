@@ -227,7 +227,7 @@ export function createGame(canvas, hud) {
   }
 
   function fillAtSource(dt) {
-    if (Math.abs(midPoint().x - SOURCE_X) < 90 && !state.carrying && state.water < 100) {
+    if (Math.abs(midPoint().x - SOURCE_X) < 90 && state.water < 100) {
       state.water = Math.min(100, state.water + 280 * dt);
       if (state.water >= 99.5) {
         state.water = 100;
