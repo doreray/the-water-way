@@ -1,0 +1,342 @@
+@font-face {
+  font-family: "ProximaNovaBlack";
+  src: url("/fonts/ProximaNovaBlack/ProximaNovaBlack.eot");
+  src: url("/fonts/ProximaNovaBlack/ProximaNovaBlack.eot?#iefix") format("embedded-opentype"),
+  url("/fonts/ProximaNovaBlack/ProximaNovaBlack.woff") format("woff"),
+  url("/fonts/ProximaNovaBlack/ProximaNovaBlack.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ProximaNovaBold";
+  src: url("/fonts/ProximaNovaBold/ProximaNovaBold.eot");
+  src: url("/fonts/ProximaNovaBold/ProximaNovaBold.eot?#iefix") format("embedded-opentype"),
+  url("/fonts/ProximaNovaBold/ProximaNovaBold.woff") format("woff"),
+  url("/fonts/ProximaNovaBold/ProximaNovaBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ProximaNovaRegular";
+  src: url("/fonts/ProximaNovaRegular/ProximaNovaRegular.eot");
+  src: url("/fonts/ProximaNovaRegular/ProximaNovaRegular.eot?#iefix") format("embedded-opentype"),
+  url("/fonts/ProximaNovaRegular/ProximaNovaRegular.woff") format("woff"),
+  url("/fonts/ProximaNovaRegular/ProximaNovaRegular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+:root {
+  --yellow: #FFC907;
+  --yellow-deep: #f3bf03;
+  --ink: #111111;
+  --paper: #fff8e8;
+  --overlay: rgba(8, 22, 28, 0.62);
+  --card: rgba(255, 248, 232, 0.96);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #151515;
+  font-family: "ProximaNovaRegular";
+  overflow: hidden;
+  touch-action: none;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.phone {
+  position: relative;
+  width: min(100vw, calc(100dvh * 9 / 16));
+  height: min(100dvh, calc(100vw * 16 / 9));
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: #77A8BB;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.game,
+#world {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.game-title {
+  color: #003366;
+  font-family: "ProximaNovaBold";
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.play-hud {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.play-hud[hidden] {
+  display: none;
+}
+
+.water-meter {
+  position: absolute;
+  top: calc(56px + var(--safe-top));
+  left: 16px;
+  width: 22px;
+  height: 42%;
+  min-height: 140px;
+  border: 3px solid #1f3d4d;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+}
+
+.water-meter-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0%;
+  background: linear-gradient(#77A8BB, #003366);
+  transition: height 120ms linear;
+}
+
+.water-meter-label {
+  position: absolute;
+  left: 30px;
+  bottom: 0;
+  width: 90px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #16303c;
+}
+
+.stats {
+  position: absolute;
+  top: calc(14px + var(--safe-top));
+  left: 16px;
+  color: #16303c;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.stats p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.world-title {
+  position: absolute;
+  top: calc(12px + var(--safe-top));
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: "ProximaNovaBlack";
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  color: #16303c;
+}
+
+.town-label {
+  position: absolute;
+  top: calc(14px + var(--safe-top));
+  right: 18px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #16303c;
+}
+
+.brand-bar {
+  position: absolute;
+  right: 14px;
+  bottom: calc(12px + var(--safe-bottom));
+  z-index: 5;
+  pointer-events: none;
+}
+
+.brand-logo {
+  width: 150px;
+}
+
+.brand-logo .colon {
+  color: #ffc20e;
+  margin: 0 1px;
+}
+
+.start-overlay,
+.end-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  padding: 16px 12px;
+  background: var(--overlay);
+  backdrop-filter: blur(3px);
+}
+
+.end-overlay {
+  z-index: 7;
+}
+
+.start-overlay.is-hidden,
+.end-overlay.is-hidden {
+  display: none;
+}
+
+.start-card {
+  width: min(100%, 400px);
+  max-height: 100%;
+  overflow: auto;
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 22px;
+  padding: 28px 22px 22px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+  text-align: center;
+}
+
+.start-logo{
+  width: 50%;
+  margin: 0 auto 20px;
+  display: block;
+  max-width: 300px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  letter-spacing: 0.08em;
+  font-size: 14px;
+  font-weight: 300;
+  color: #1A1A1A;
+}
+
+h1,
+h2 {
+  margin: 0 0 14px;
+  font-family: "ProximaNovaBold";
+  font-size: clamp(28px, 6vw, 40px);
+  line-height: 1.05;
+}
+
+.instructions {
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  display: grid;
+  gap: 10px;
+}
+
+.instructions li {
+  position: relative;
+  padding-left: 28px;
+  font-family: "ProximaNovaRegular";
+  font-size: 15px;
+  line-height: 1.4;
+  color: #2b2b2b;
+}
+
+.instructions li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--yellow);
+  box-shadow: inset 0 0 0 4px #fff3c4;
+}
+
+.final-score {
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.impact {
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: #333;
+}
+
+.cta,
+.ghost {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 999px;
+  padding: 16px 18px;
+  font: 700 18px/1 "ProximaNovaBold";
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.cta {
+  background: var(--yellow);
+  color: var(--ink);
+  box-shadow: 0 8px 0 var(--yellow-deep);
+}
+
+.cta:active {
+  transform: translateY(3px);
+  box-shadow: 0 5px 0 var(--yellow-deep);
+}
+
+.cta-link {
+  margin-bottom: 10px;
+}
+
+.ghost {
+  margin-top: 4px;
+  background: transparent;
+  color: #16303c;
+  box-shadow: inset 0 0 0 2px #16303c;
+}
+
+@media (max-height: 500px) {
+  .start-card {
+    padding: 16px 18px;
+    max-height: 96dvh;
+    overflow: auto;
+  }
+
+  h1,
+  h2 {
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+
+  .instructions {
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+}
